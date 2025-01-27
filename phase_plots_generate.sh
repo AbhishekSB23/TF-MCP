@@ -1,0 +1,6 @@
+python phase_plots_generate_countour.py --algo 'MCP'
+python phase_plots_generate_countour.py --algo 'FMCP'
+python phase_plots_generate_countour.py --algo 'TF_MCP'
+python phase_plots_generate_countour.py --algo 'TF_FMCP'
+python phase_plots_generate_countour.py --algo 'RTF_MCP'
+python phase_plots_generate_countour.py --algo 'RTF_FMCP'
