@@ -10,11 +10,11 @@ from argparse import ArgumentParser
 # Load the data 
 import a_algorithms
 import time
-
+import os
 start = time.time()
 
 parser = ArgumentParser(description='Phase plots test')
-parser.add_argument('--device', type=str, default='cuda:1')
+parser.add_argument('--device', type=str, default='cuda:0')
 parser.add_argument('--algo', type=str, default='ISTA')
 parser.add_argument('--sparsity', type=int, default=30)
 parser.add_argument('--SNR', type=int, default=50)
@@ -24,8 +24,8 @@ algo = args.algo
 device = args.device; numIter = 5000
 sparsity = args.sparsity
 SNR = args.SNR
-m = 70
-
+m = 50
+os.makedirs("MCP_SNR_vs_Iter",exist_ok=True)
 A = sio.loadmat(f'phase_plot_sim_data_test/A')['A']; D = np.eye(100)
 f = open(f"./MCP_SNR_vs_Iter/{args.algo}_sparsity_{sparsity}_SNR_{round(SNR,2)}_meas_{m}.txt", "w")
 

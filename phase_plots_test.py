@@ -8,11 +8,11 @@ from argparse import ArgumentParser
 # Load the data 
 import a_algorithms
 import time
-
+import os
 start = time.time()
 
 parser = ArgumentParser(description='Phase plots test')
-parser.add_argument('--device', type=str, default='cuda:1')
+parser.add_argument('--device', type=str, default='cuda:0')
 parser.add_argument('--algo', type=str, default='ISTA')
 args = parser.parse_args()
 
@@ -24,7 +24,7 @@ RSNR = np.zeros([21,21]); NMSE = np.zeros([21,21]); PES = np.zeros([21,21]);
 # RSNR = np.zeros([9,9]); NMSE = np.zeros([9, 9]); PES = np.zeros([9, 9])
 
 A = sio.loadmat(f'phase_plot_sim_data_test/A')['A']; D = np.eye(100)
-
+os.makedirs("phase_plot_sim_results_test",exist_ok=True)
 # Thresholds meant for MCP
 for snr_idx, SNR in enumerate(SNR_l):    
     for spr_idx, sparsity in enumerate(SPR_l):
@@ -32,7 +32,7 @@ for snr_idx, SNR in enumerate(SNR_l):
         y = data['y'] ; x = data['x'] 
 
         TF_D = sio.loadmat(f'phase_plots_vals_train/{args.algo}_sparsity_{sparsity}_SNR_{SNR}')
-        thr_best = TF_D['thr_snr'][0][0]; gam_best = TF_D['gam_snr'][0][0];
+        thr_best = TF_D['thr_snr'][0][0]; gam_best = TF_D['gam_snr'][0][0]
 
         if args.algo == 'ISTA':
             x_out, x_list, time_list = a_algorithms.a_ISTA(y, A, D, device, numIter, thr_best)

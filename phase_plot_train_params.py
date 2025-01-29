@@ -8,7 +8,7 @@ import scipy
 import scipy.io as sio
 from argparse import ArgumentParser
 import a_algorithms
-
+import os
 parser = ArgumentParser(description='Phase plots train')
 parser.add_argument('--sparsity', type=int, default=10)
 # parser.add_argument('--SNR', type=int, default=10)
@@ -28,6 +28,9 @@ A = sio.loadmat(f'phase_plot_sim_data_train/A')['A']
 D = np.eye(100)
 alpha = (LA.norm(A, 2) ** 2) * 1.001
 gam_best = 0; thr_best = 0
+
+os.makedirs("./phase_plot_logs_train/",exist_ok=True)
+os.makedirs("./phase_plots_vals_train/",exist_ok=True)
 
 for sparsity in SPR_l:
     for SNR in SNR_l:

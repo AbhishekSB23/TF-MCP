@@ -8,7 +8,7 @@ import scipy.io as sio
 from argparse import ArgumentParser
 # Load the data 
 import a_algorithms
-
+import os 
 parser = ArgumentParser(description='Phase plots Generation')
 parser.add_argument('--algo', type=str, default='ISTA')
 args = parser.parse_args()
@@ -17,7 +17,7 @@ RSNR = np.zeros([21,21]); NMSE = np.zeros([21,21]); PES = np.zeros([21,21]);
 SNR_l = range(10,51,2); SPR_l = range(10,31)
 
 X, Y = np.meshgrid(SNR_l, SPR_l)
-
+os.makedirs("phase_plot_sim_results_train",exist_ok=True)
 # Thresholds meant for MCP
 for snr_idx, SNR in enumerate(SNR_l):
     for spr_idx, sparsity in enumerate(SPR_l):
